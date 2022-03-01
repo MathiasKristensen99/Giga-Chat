@@ -4,7 +4,7 @@ import { EntityManager, Repository } from 'typeorm';
 import { UserSchema } from './user.schema';
 import { Injectable } from '@nestjs/common';
 
-@Injectable
+@Injectable()
 export class UserRepositoryAdapter implements IUserRepository {
   private readonly userRepo: Repository<User>;
 
