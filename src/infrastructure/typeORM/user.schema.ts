@@ -12,6 +12,7 @@ export const UserSchema = new EntitySchema<User>({
     },
     name: {
       type: 'varchar',
+      unique: true,
     },
     email: {
       type: 'varchar',

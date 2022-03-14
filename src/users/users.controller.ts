@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { UsersService } from '../domain/users.service';
 import { CreateUserDto } from './dto/create-user.dto';
+import { SearchUserDto } from './dto/search-user.dto';
 import { User } from '../core/user.entity';
 
 @Controller('users')
@@ -38,9 +39,9 @@ export class UsersController {
     return this.usersService.findOne(+id);
   }
 
-  @Get('/search/:name')
-  search(@Param('name') name: string): Promise<User> {
-    return this.usersService.search(name);
+  @Post('/search/:name')
+  search(@Body() searchUserDto: SearchUserDto) {
+    return this.usersService.search(searchUserDto.name);
   }
 
   @Delete(':id')

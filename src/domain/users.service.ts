@@ -16,7 +16,7 @@ export class UsersService {
     return this.userRepo.findAll();
   }
 
-  search(name: string) {
+  search(name: string): Promise<User> {
     return this.userRepo.search(name);
   }
 

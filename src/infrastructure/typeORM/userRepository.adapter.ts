@@ -20,7 +20,7 @@ export class UserRepositoryAdapter implements IUserRepository {
     return this.userRepo.find();
   }
 
-  search(name: string) {
-    return this.userRepo.find({ where: { name: name } });
+  search(name: string): Promise<User> {
+    return this.userRepo.findOne({ where: { name: name } });
   }
 }
