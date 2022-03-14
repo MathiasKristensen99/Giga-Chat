@@ -6,4 +6,6 @@ export interface IFriendRequestRepository {
     receivedUserUuid: string,
     isAccepted: boolean,
   ): Promise<FriendRequest>;
+
+  getFriendRequests(receivedUserUuid: string): Promise<FriendRequest[]>;
 }

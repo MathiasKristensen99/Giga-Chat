@@ -24,6 +24,10 @@ export class UsersService {
     return `This action returns a #${id} user`;
   }
 
+  getUserById(uuid: string): Promise<User> {
+    return this.userRepo.getUserById(uuid);
+  }
+
   remove(id: number) {
     return `This action removes a #${id} user`;
   }

@@ -25,4 +25,10 @@ export class FriendRequestRepositoryAdapter
       isAccepted: isAccepted,
     });
   }
+
+  getFriendRequests(receivedUserUuid: string): Promise<FriendRequest[]> {
+    return this.friendRequestRepo.find({
+      where: { receivedUserUuid: receivedUserUuid },
+    });
+  }
 }

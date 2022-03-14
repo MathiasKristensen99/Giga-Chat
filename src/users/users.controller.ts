@@ -35,9 +35,9 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  //@Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+  @Get(':uuid')
+  findOne(@Param('uuid') uuid: string): Promise<User> {
+    return this.usersService.getUserById(uuid);
   }
 
   @Post('/search/:name')

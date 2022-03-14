@@ -25,8 +25,8 @@ export class FriendRequestsService {
     return `This action returns all friendRequests`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} friendRequest`;
+  getFriendRequests(receivedUserUuid: string): Promise<FriendRequest[]> {
+    return this.friendRequestRepo.getFriendRequests(receivedUserUuid);
   }
 
   update(id: number, updateFriendRequestDto: UpdateFriendRequestDto) {

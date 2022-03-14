@@ -11,6 +11,7 @@ import {
 import { FriendRequestsService } from '../domain/friend-requests.service';
 import { CreateFriendRequestDto } from './dto/create-friend-request.dto';
 import { UpdateFriendRequestDto } from './dto/update-friend-request.dto';
+import { FriendRequest } from "../core/friend-request.entity";
 
 @Controller('friend-requests')
 export class FriendRequestsController {
@@ -33,9 +34,11 @@ export class FriendRequestsController {
     return this.friendRequestsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.friendRequestsService.findOne(+id);
+  @Get(':receivedUserUuid')
+  getFriendRequests(
+    @Param('receivedUserUuid') receivedUserUuid: string,
+  ): Promise<FriendRequest[]> {
+    return this.friendRequestsService.getFriendRequests(receivedUserUuid);
   }
 
   @Patch(':id')
