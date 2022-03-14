@@ -27,4 +27,8 @@ export class UsersService {
   remove(id: number) {
     return `This action removes a #${id} user`;
   }
+
+  login(email: string, password: string) {
+    return this.userRepo.getUser(email, password);
+  }
 }
