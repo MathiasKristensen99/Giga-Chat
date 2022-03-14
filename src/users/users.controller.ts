@@ -7,9 +7,11 @@ import {
   Param,
   Delete,
   Inject,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from '../domain/users.service';
 import { CreateUserDto } from './dto/create-user.dto';
+import { User } from '../core/user.entity';
 
 @Controller('users')
 export class UsersController {
@@ -31,9 +33,14 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Get(':id')
+  //@Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);
+  }
+
+  @Get('/search/:name')
+  search(@Param('name') name: string): Promise<User> {
+    return this.usersService.search(name);
   }
 
   @Delete(':id')

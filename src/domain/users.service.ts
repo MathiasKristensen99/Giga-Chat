@@ -13,7 +13,11 @@ export class UsersService {
   }
 
   findAll() {
-    return `This action returns all users`;
+    return this.userRepo.findAll();
+  }
+
+  search(name: string) {
+    return this.userRepo.search(name);
   }
 
   findOne(id: number) {
