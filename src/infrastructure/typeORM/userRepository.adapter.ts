@@ -25,7 +25,12 @@ export class UserRepositoryAdapter implements IUserRepository {
   }
 
   getUser(email: string, password: string): Promise<User> {
-    return Promise.resolve(undefined);
+    return this.userRepo.findOne({
+      where: {
+        email: email,
+        password: password,
+      },
+    });
   }
 
   getUserById(uuid: string): Promise<User> {
