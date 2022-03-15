@@ -13,6 +13,9 @@ export const FriendRequestSchema = new EntitySchema<FriendRequest>({
     sentUserUuid: {
       type: 'varchar',
     },
+    sentUserName: {
+      type: 'varchar',
+    },
     receivedUserUuid: {
       type: 'varchar',
     },

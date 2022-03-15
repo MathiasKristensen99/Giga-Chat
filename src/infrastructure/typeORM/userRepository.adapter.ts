@@ -13,7 +13,7 @@ export class UserRepositoryAdapter implements IUserRepository {
   }
 
   create(name: string, email: string, password: string): Promise<User> {
-    return this.userRepo.save({ name: name, email: email, password: password });
+    return this.userRepo.save({ name: name, email: email, password: password, friends: "" });
   }
 
   findAll() {
@@ -30,5 +30,18 @@ export class UserRepositoryAdapter implements IUserRepository {
 
   getUserById(uuid: string): Promise<User> {
     return this.userRepo.findOne({ where: { uuid: uuid } });
+  }
+
+  async addFriend(uuid: string, name: string) {
+    let user = new User();
+    user = await this.getUserById(uuid);
+
+    await this.userRepo.save({
+      uuid: uuid,
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      friends: user.friends + ', ' + name,
+    });
   }
 }

@@ -11,7 +11,7 @@ import {
 import { FriendRequestsService } from '../domain/friend-requests.service';
 import { CreateFriendRequestDto } from './dto/create-friend-request.dto';
 import { UpdateFriendRequestDto } from './dto/update-friend-request.dto';
-import { FriendRequest } from "../core/friend-request.entity";
+import { FriendRequest } from '../core/friend-request.entity';
 
 @Controller('friend-requests')
 export class FriendRequestsController {
@@ -24,6 +24,7 @@ export class FriendRequestsController {
   create(@Body() createFriendRequestDto: CreateFriendRequestDto) {
     return this.friendRequestsService.create(
       createFriendRequestDto.sentUserUuid,
+      createFriendRequestDto.sentUserName,
       createFriendRequestDto.receivedUserUuid,
       createFriendRequestDto.isAccepted,
     );
@@ -49,8 +50,8 @@ export class FriendRequestsController {
     return this.friendRequestsService.update(+id, updateFriendRequestDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.friendRequestsService.remove(+id);
+  @Delete(':uuid')
+  remove(@Param('uuid') uuid: string) {
+    return this.friendRequestsService.delete(uuid);
   }
 }
