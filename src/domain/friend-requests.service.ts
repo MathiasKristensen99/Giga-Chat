@@ -11,11 +11,13 @@ export class FriendRequestsService {
 
   create(
     sentUserUuid: string,
+    sentUserName: string,
     receivedUserUuid: string,
     isAccepted: boolean,
   ): Promise<FriendRequest> {
     return this.friendRequestRepo.create(
       sentUserUuid,
+      sentUserName,
       receivedUserUuid,
       isAccepted,
     );
@@ -33,7 +35,7 @@ export class FriendRequestsService {
     return `This action updates a #${id} friendRequest`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} friendRequest`;
+  delete(uuid: string) {
+    return this.friendRequestRepo.delete(uuid);
   }
 }

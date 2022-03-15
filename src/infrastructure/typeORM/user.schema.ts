@@ -21,6 +21,9 @@ export const UserSchema = new EntitySchema<User>({
     password: {
       type: 'varchar',
     },
+    friends: {
+      type: 'varchar',
+    },
   },
   relations: {},
 });

@@ -35,4 +35,8 @@ export class UsersService {
   login(email: string, password: string) {
     return this.userRepo.getUser(email, password);
   }
+
+  addFriend(uuid: string, name: string) {
+    return this.userRepo.addFriend(uuid, name);
+  }
 }

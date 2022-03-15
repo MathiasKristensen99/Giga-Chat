@@ -16,11 +16,13 @@ export class FriendRequestRepositoryAdapter
 
   create(
     sentUserUuid: string,
+    sentUserName: string,
     receivedUserUuid: string,
     isAccepted: boolean,
   ): Promise<FriendRequest> {
     return this.friendRequestRepo.save({
       sentUserUuid: sentUserUuid,
+      sentUserName: sentUserName,
       receivedUserUuid: receivedUserUuid,
       isAccepted: isAccepted,
     });
@@ -30,5 +32,9 @@ export class FriendRequestRepositoryAdapter
     return this.friendRequestRepo.find({
       where: { receivedUserUuid: receivedUserUuid },
     });
+  }
+
+  delete(uuid: string) {
+    return this.friendRequestRepo.delete(uuid);
   }
 }

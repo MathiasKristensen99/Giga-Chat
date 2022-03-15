@@ -14,6 +14,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { SearchUserDto } from './dto/search-user.dto';
 import { User } from '../core/user.entity';
 import { LoginUserDto } from './dto/login-user.dto';
+import { AddFriendDto } from './dto/add-friend.dto';
 
 @Controller('users')
 export class UsersController {
@@ -53,5 +54,10 @@ export class UsersController {
   @Post('/login')
   login(@Body() loginUser: LoginUserDto): Promise<User> {
     return this.usersService.login(loginUser.email, loginUser.password);
+  }
+
+  @Post('/addFriend')
+  addFriend(@Body() addFriendDto: AddFriendDto) {
+    return this.usersService.addFriend(addFriendDto.uuid, addFriendDto.name);
   }
 }
