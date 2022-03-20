@@ -54,4 +54,11 @@ export class UserRepositoryAdapter implements IUserRepository {
       friends: user.friends + ', ' + name,
     });
   }
+
+  async getFriends(uuid: string): Promise<string> {
+    let user = new User();
+    user = await this.getUserById(uuid);
+
+    return user.friends;
+  }
 }

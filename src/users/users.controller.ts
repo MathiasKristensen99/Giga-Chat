@@ -60,4 +60,9 @@ export class UsersController {
   addFriend(@Body() addFriendDto: AddFriendDto) {
     return this.usersService.addFriend(addFriendDto.uuid, addFriendDto.name);
   }
+
+  @Get('/friends/:uuid')
+  getFriends(@Param('uuid') uuid: string): Promise<string> {
+    return this.usersService.getFriends(uuid);
+  }
 }

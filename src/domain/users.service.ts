@@ -39,4 +39,8 @@ export class UsersService {
   addFriend(uuid: string, name: string) {
     return this.userRepo.addFriend(uuid, name);
   }
+
+  getFriends(uuid: string): Promise<string> {
+    return this.userRepo.getFriends(uuid);
+  }
 }
