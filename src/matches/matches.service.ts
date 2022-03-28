@@ -8,8 +8,20 @@ import { Match } from './entities/match.entity';
 export class MatchesService {
   constructor(@Inject('MATCH_MODEL') private matchModel: Model<Match>) {}
 
-  create(createMatchDto: CreateMatchDto) {
-    return 'This action adds a new match';
+  async create(createMatchDto: CreateMatchDto): Promise<Match> {
+    if (createMatchDto.isAMatch) {
+      const match = await this.matchModel
+        .findOne({ userUuid: createMatchDto.userMatchSenderUuid })
+        .exec();
+      match.likes.push(createMatchDto.userMatchReceiverUuid);
+      return match.save();
+    } else {
+      const match = await this.matchModel
+        .findOne({ userUuid: createMatchDto.userMatchSenderUuid })
+        .exec();
+      match.dislikes.push(createMatchDto.userMatchReceiverUuid);
+      return match.save();
+    }
   }
 
   findAll() {

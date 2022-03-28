@@ -2,10 +2,12 @@ import {
   WebSocketGateway,
   SubscribeMessage,
   MessageBody,
+  WebSocketServer,
 } from '@nestjs/websockets';
 import { MatchesService } from './matches.service';
 import { CreateMatchDto } from './dto/create-match.dto';
 import { UpdateMatchDto } from './dto/update-match.dto';
+import { Server } from 'socket.io';
 
 @WebSocketGateway({
   cors: {
@@ -14,10 +16,14 @@ import { UpdateMatchDto } from './dto/update-match.dto';
 })
 @WebSocketGateway()
 export class MatchesGateway {
+  @WebSocketServer()
+  server: Server;
+
   constructor(private readonly matchesService: MatchesService) {}
 
   @SubscribeMessage('createMatch')
   create(@MessageBody() createMatchDto: CreateMatchDto) {
+    //this.server.emit(createMatchDto);
     return this.matchesService.create(createMatchDto);
   }
 
