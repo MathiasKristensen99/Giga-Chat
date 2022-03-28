@@ -1,4 +1,5 @@
 export class Chat {
-  text: string;
-  room: string;
+  private readonly userUuid: string;
+  private readonly likes: string[];
+  private readonly dislikes: string[];
 }
