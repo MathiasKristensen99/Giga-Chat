@@ -4,4 +4,5 @@ export class Match extends Document {
   userUuid: string;
   likes: string[];
   dislikes: string[];
+  matches: string[];
 }

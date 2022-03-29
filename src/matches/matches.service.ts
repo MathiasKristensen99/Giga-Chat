@@ -9,11 +9,14 @@ export class MatchesService {
   constructor(@Inject('MATCH_MODEL') private matchModel: Model<Match>) {}
 
   async create(createMatchDto: CreateMatchDto): Promise<Match> {
-    if (createMatchDto.isAMatch) {
+    if (createMatchDto.isLiked) {
       const match = await this.matchModel
         .findOne({ userUuid: createMatchDto.userMatchSenderUuid })
         .exec();
       match.likes.push(createMatchDto.userMatchReceiverUuid);
+      if (await this.checkForMatch(createMatchDto)) {
+        match.matches.push(createMatchDto.userMatchReceiverUuid);
+      }
       return match.save();
     } else {
       const match = await this.matchModel
@@ -22,6 +25,17 @@ export class MatchesService {
       match.dislikes.push(createMatchDto.userMatchReceiverUuid);
       return match.save();
     }
+  }
+
+  async checkForMatch(createMatchDto: CreateMatchDto): Promise<boolean> {
+    const match = await this.matchModel
+      .findOne({ userUuid: createMatchDto.userMatchReceiverUuid })
+      .exec();
+
+    if (match.likes.includes(createMatchDto.userMatchSenderUuid)) {
+      match.matches.push(createMatchDto.userMatchSenderUuid);
+      return true;
+    } else return false;
   }
 
   findAll() {

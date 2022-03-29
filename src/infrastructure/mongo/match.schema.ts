@@ -4,4 +4,5 @@ export const MatchSchema = new mongoose.Schema({
   userUuid: String,
   likes: [String],
   dislikes: [String],
+  matches: [String],
 });
